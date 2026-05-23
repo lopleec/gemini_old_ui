@@ -771,7 +771,7 @@ user-query,
 .response-container,
 .response-content,
 model-response .markdown-main-panel {
-  font-size: 15.7px !important;
+  font-size: 15.4px !important;
   line-height: 1.8 !important;
 }
 
@@ -779,6 +779,6 @@ chat-input,
 textarea,
 div[role="textbox"],
 rich-textarea {
-  font-size: 15.7px !important;
+  font-size: 15.4px !important;
   line-height: 1.7 !important;
 }
