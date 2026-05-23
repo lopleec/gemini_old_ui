@@ -1,0 +1,776 @@
+/*
+ * Gemini UI Optimizer - content.css
+ *
+ * RULES:
+ *   - ONLY kill aurora glow. Do NOT wildcard-kill "gradient" classes.
+ *   - NEVER use overflow:hidden on input/fieldset/textarea elements.
+ *   - Set all underlying surfaces to the correct bg color so native
+ *     gradients blend seamlessly.
+ */
+
+/* ==========================================
+   1. Kill aurora glow ONLY
+   ========================================== */
+
+.aurora-outer-container,
+.aurora,
+.aurora-bg,
+[class*="aurora"] {
+  background: none !important;
+  background-image: none !important;
+  filter: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+chat-window::before,
+chat-window::after,
+.welcome-grow-container::before,
+.welcome-grow-container::after {
+  background: none !important;
+  display: none !important;
+}
+
+chat-window {
+  background: transparent !important;
+}
+
+
+/* ==========================================
+   2. Light Theme
+   ========================================== */
+
+body.custom-gemini-light {
+  --gemini-light-page-bg: #f3f6fc;
+  --gemini-light-bg: #e8edf4;
+  --gemini-light-bg-active: #e8edf4;
+  --gemini-light-bottom-bg: #f7f9fe;
+  --gemini-light-code-bg: #e3e8f1;
+}
+
+/* --- 2.1 App background surfaces → fig 6 --- */
+body.custom-gemini-light,
+body.custom-gemini-light chat-app,
+body.custom-gemini-light bard-sidenav-content,
+body.custom-gemini-light .main-content,
+body.custom-gemini-light .conversation-container,
+body.custom-gemini-light header,
+body.custom-gemini-light .header-container,
+body.custom-gemini-light .chat-container,
+body.custom-gemini-light .input-container,
+body.custom-gemini-light .input-wrapper,
+body.custom-gemini-light .bottom-container,
+body.custom-gemini-light .scroll-to-bottom-container,
+body.custom-gemini-light .chat-history,
+body.custom-gemini-light .zero-state,
+body.custom-gemini-light .welcome-container,
+body.custom-gemini-light .capabilities-container {
+  background-color: var(--gemini-light-page-bg) !important;
+  background-image: none !important;
+}
+
+/* --- 2.2 Popup menus / dialogs → fig 5 --- */
+body.custom-gemini-light .mat-mdc-menu-panel,
+body.custom-gemini-light .mdc-menu-surface,
+body.custom-gemini-light .mat-mdc-dialog-container,
+body.custom-gemini-light .mat-mdc-dialog-surface,
+body.custom-gemini-light .mat-mdc-select-panel {
+  background-color: var(--gemini-light-bg) !important;
+  background: var(--gemini-light-bg) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 24px !important;
+}
+
+/* Usage/quota/info cards also need the sidebar/dialog surface color */
+body.custom-gemini-light .mat-mdc-card,
+body.custom-gemini-light .mdc-card,
+body.custom-gemini-light mat-card,
+body.custom-gemini-light [class*="quota-card"],
+body.custom-gemini-light [class*="usage-card"],
+body.custom-gemini-light [class*="limit-card"],
+body.custom-gemini-light [class*="plan-card"],
+body.custom-gemini-light [class*="stats-card"] {
+  background-color: var(--gemini-light-bg) !important;
+  background: var(--gemini-light-bg) !important;
+}
+
+body.custom-gemini-light .mat-mdc-menu-content,
+body.custom-gemini-light .mdc-list,
+body.custom-gemini-light .mat-mdc-dialog-content {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+body.custom-gemini-light .mdc-menu-surface--open {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* Input uploader / tools overlays should stay white, unlike the general menus */
+body.custom-gemini-light .cdk-overlay-pane > .mat-mdc-card.lm-menu-theme,
+body.custom-gemini-light .cdk-overlay-pane > .mdc-card.lm-menu-theme {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+/* --- 2.3 Sidebar → #e8edf4 --- */
+body.custom-gemini-light bard-sidenav,
+body.custom-gemini-light .sidenav-with-history-container,
+body.custom-gemini-light side-navigation-content,
+body.custom-gemini-light .overflow-container,
+body.custom-gemini-light bard-sidenav .chat-history,
+body.custom-gemini-light bard-sidenav .expandable-section-content-inner,
+body.custom-gemini-light bard-sidenav mat-action-list,
+body.custom-gemini-light bard-sidenav .side-navigation-container,
+body.custom-gemini-light bard-sidenav nav {
+  background-color: var(--gemini-light-bg) !important;
+  background-image: none !important;
+}
+
+/* --- 2.4 Selected/active conversation item → same as sidebar bg --- */
+body.custom-gemini-light bard-sidenav .mat-mdc-list-item.mdc-list-item--activated,
+body.custom-gemini-light bard-sidenav .mat-mdc-list-item.mdc-list-item--selected,
+body.custom-gemini-light bard-sidenav .mat-mdc-list-item.active,
+body.custom-gemini-light bard-sidenav .mat-mdc-list-item[aria-selected="true"] {
+  background-color: var(--gemini-light-bg-active) !important;
+}
+
+/* --- 2.5 User message bubble → only the inner bubble gets the fill --- */
+body.custom-gemini-light user-message .message-bubble,
+body.custom-gemini-light .user-query-bubble-with-background {
+  background-color: var(--gemini-light-bg) !important;
+  background: var(--gemini-light-bg) !important;
+}
+
+body.custom-gemini-light user-query-content,
+body.custom-gemini-light user-message .message-bubble,
+body.custom-gemini-light .user-query-bubble-with-background {
+  border-radius: 28px !important;
+}
+
+body.custom-gemini-light user-query-content,
+body.custom-gemini-light .user-query-container,
+body.custom-gemini-light .query-content,
+body.custom-gemini-light .user-text-container {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.custom-gemini-light .user-query-bubble-with-background {
+  display: inline-block !important;
+  width: fit-content !important;
+  max-width: min(100%, 680px) !important;
+}
+
+body.custom-gemini-light .query-text-line,
+body.custom-gemini-light .query-content,
+body.custom-gemini-light .query-text,
+body.custom-gemini-light [class*="query-content"] {
+  background-color: transparent !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* --- 2.6 Code blocks → sidebar-tinted --- */
+body.custom-gemini-light pre,
+body.custom-gemini-light .code-block,
+body.custom-gemini-light code-block,
+body.custom-gemini-light .code-block-wrapper,
+body.custom-gemini-light .code-container,
+body.custom-gemini-light [class*="code-block"],
+body.custom-gemini-light .code-block-decoration {
+  background-color: var(--gemini-light-code-bg) !important;
+  background: var(--gemini-light-code-bg) !important;
+  color: #111111 !important;
+  border-radius: 12px !important;
+}
+body.custom-gemini-light code {
+  background-color: var(--gemini-light-code-bg) !important;
+  color: #111111 !important;
+}
+
+body.custom-gemini-light code-block [class*="header"],
+body.custom-gemini-light code-block [class*="language"],
+body.custom-gemini-light code-block [class*="toolbar"],
+body.custom-gemini-light .code-block [class*="header"],
+body.custom-gemini-light .code-block [class*="language"],
+body.custom-gemini-light .code-block [class*="toolbar"],
+body.custom-gemini-light [class*="copy-button"],
+body.custom-gemini-light [class*="download-button"],
+body.custom-gemini-light .code-block-decoration,
+body.custom-gemini-light .code-block-decoration * {
+  color: #111111 !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* --- 2.7 Sidebar gradients (natural fade from sidebar color) --- */
+body.custom-gemini-light bard-sidenav .top-gradient-container,
+body.custom-gemini-light bard-sidenav .top-gradient {
+  display: none !important;
+  height: 0 !important;
+  background: none !important;
+}
+body.custom-gemini-light bard-sidenav .bottom-gradient-container,
+body.custom-gemini-light bard-sidenav .bottom-gradient {
+  background: linear-gradient(to top, var(--gemini-light-bg) 0%, transparent 100%) !important;
+  height: 72px !important;
+}
+
+/* --- 2.7a Conversation bottom fade → softer transition into the input area --- */
+body.custom-gemini-light input-container.input-gradient,
+body.custom-gemini-light input-container[class*="input-gradient"],
+body.custom-gemini-light .input-gradient {
+  background-color: var(--gemini-light-bottom-bg) !important;
+  background-image: none !important;
+}
+
+body.custom-gemini-light input-container.input-gradient::before,
+body.custom-gemini-light input-container[class*="input-gradient"]::before,
+body.custom-gemini-light .input-gradient::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: -56px !important;
+  height: 56px !important;
+  background: linear-gradient(
+    to bottom,
+    rgba(243, 246, 252, 0) 0%,
+    rgba(243, 246, 252, 0.72) 38%,
+    rgba(247, 249, 254, 0.9) 76%,
+    var(--gemini-light-bottom-bg) 100%
+  ) !important;
+  pointer-events: none !important;
+}
+
+body.custom-gemini-light input-container.input-gradient::after,
+body.custom-gemini-light input-container[class*="input-gradient"]::after,
+body.custom-gemini-light .input-gradient::after {
+  background: none !important;
+}
+
+/* --- 2.7b Usage page luminous surfaces → sidebar/dialog color --- */
+body.custom-gemini-light .gxu-currently-luminous,
+body.custom-gemini-light .gxu-weekly-luminous,
+body.custom-gemini-light .tier-pill-luminous {
+  background-color: var(--gemini-light-bg) !important;
+  background-image: none !important;
+}
+
+/* --- 2.7c Page-specific light surfaces --- */
+body.custom-gemini-light FLEX-WINDOW-CONTAINER,
+body.custom-gemini-light .window-container.desktop,
+body.custom-gemini-light PERSONAL-INTELLIGENCE-PAGE,
+body.custom-gemini-light PERSONAL-INTELLIGENCE-PAGE .page-container,
+body.custom-gemini-light PERSONAL-INTELLIGENCE-PAGE .page-content,
+body.custom-gemini-light PUBLICLY-SHARED-LINKS-PAGE,
+body.custom-gemini-light ALL-BOTS,
+body.custom-gemini-light ALL-OPALS,
+body.custom-gemini-light ALL-BOTS .container,
+body.custom-gemini-light ALL-OPALS .container,
+body.custom-gemini-light ALL-BOTS .inner-container,
+body.custom-gemini-light ALL-OPALS .inner-container,
+body.custom-gemini-light .premade-gems-cards-container,
+body.custom-gemini-light .premade-gems-cards-container-inner,
+body.custom-gemini-light .bots-section-container,
+body.custom-gemini-light .bot-list-container {
+  background-color: var(--gemini-light-page-bg) !important;
+  background: var(--gemini-light-page-bg) !important;
+  background-image: none !important;
+}
+
+body.custom-gemini-light MEMORY-IMPORT-SECTION .prompt-card,
+body.custom-gemini-light PERSONAL-INTELLIGENCE-PAGE .section,
+body.custom-gemini-light TASK-SUGGESTION-CARD,
+body.custom-gemini-light .ts-grid-container-card,
+body.custom-gemini-light .no-tasks-container,
+body.custom-gemini-light .template-gallery-card,
+body.custom-gemini-light .shared-conversation {
+  background-color: var(--gemini-light-bg) !important;
+  background: var(--gemini-light-bg) !important;
+  background-image: none !important;
+}
+
+/* --- 2.8 Input Box (white, pill-shaped) --- */
+body.custom-gemini-light .input-area-container,
+body.custom-gemini-light fieldset {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 32px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.custom-gemini-light .textarea-wrapper,
+body.custom-gemini-light .input-area {
+  background-color: #ffffff !important;
+  border-radius: 32px !important;
+}
+
+body.custom-gemini-light chat-input,
+body.custom-gemini-light textarea,
+body.custom-gemini-light div[role="textbox"],
+body.custom-gemini-light rich-textarea {
+  background-color: transparent !important;
+}
+
+
+/* ==========================================
+   3. Dark Theme
+   ========================================== */
+
+body.custom-gemini-dark {
+  --gemini-dark-page-bg: #000000;
+  --gemini-dark-bg: #1a1a1a;
+  --gemini-dark-bg-active: #2a2a2b;
+  --gemini-dark-bottom-bg: #000000;
+  --gemini-dark-input-bg: #1e1e1f;
+}
+
+/* --- 3.1 All background surfaces → #000000 --- */
+body.custom-gemini-dark,
+body.custom-gemini-dark chat-app,
+body.custom-gemini-dark bard-sidenav-content,
+body.custom-gemini-dark .main-content,
+body.custom-gemini-dark .conversation-container,
+body.custom-gemini-dark header,
+body.custom-gemini-dark .header-container,
+body.custom-gemini-dark .chat-container,
+body.custom-gemini-dark .input-container,
+body.custom-gemini-dark .input-wrapper,
+body.custom-gemini-dark .bottom-container,
+body.custom-gemini-dark .scroll-to-bottom-container,
+body.custom-gemini-dark .chat-history,
+body.custom-gemini-dark .zero-state,
+body.custom-gemini-dark .welcome-container,
+body.custom-gemini-dark .capabilities-container {
+  background-color: var(--gemini-dark-page-bg) !important;
+  background-image: none !important;
+}
+
+/* --- 3.2 Popup menus / dialogs --- */
+body.custom-gemini-dark .mat-mdc-menu-panel,
+body.custom-gemini-dark .mdc-menu-surface,
+body.custom-gemini-dark .mat-mdc-dialog-container,
+body.custom-gemini-dark .mat-mdc-dialog-surface,
+body.custom-gemini-dark .mat-mdc-select-panel {
+  background-color: var(--gemini-dark-input-bg) !important;
+  background: var(--gemini-dark-input-bg) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 24px !important;
+}
+
+body.custom-gemini-dark .mat-mdc-menu-content,
+body.custom-gemini-dark .mdc-list,
+body.custom-gemini-dark .mat-mdc-dialog-content,
+body.custom-gemini-dark .mdc-menu-surface--open {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* --- 3.3 Sidebar → #1a1a1a --- */
+body.custom-gemini-dark bard-sidenav,
+body.custom-gemini-dark .sidenav-with-history-container,
+body.custom-gemini-dark side-navigation-content,
+body.custom-gemini-dark .overflow-container,
+body.custom-gemini-dark bard-sidenav .chat-history,
+body.custom-gemini-dark bard-sidenav .expandable-section-content,
+body.custom-gemini-dark bard-sidenav .expandable-section-content-inner,
+body.custom-gemini-dark bard-sidenav mat-action-list,
+body.custom-gemini-dark bard-sidenav .side-navigation-container,
+body.custom-gemini-dark bard-sidenav nav {
+  background-color: var(--gemini-dark-bg) !important;
+  background-image: none !important;
+}
+
+/* --- 3.4 Selected/active conversation item --- */
+body.custom-gemini-dark bard-sidenav .mat-mdc-list-item.mdc-list-item--activated,
+body.custom-gemini-dark bard-sidenav .mat-mdc-list-item.mdc-list-item--selected,
+body.custom-gemini-dark bard-sidenav .mat-mdc-list-item.active,
+body.custom-gemini-dark bard-sidenav .mat-mdc-list-item[aria-selected="true"] {
+  background-color: var(--gemini-dark-bg-active) !important;
+}
+
+/* --- 3.5 User message bubble → only the inner bubble gets the fill --- */
+body.custom-gemini-dark user-message .message-bubble,
+body.custom-gemini-dark .user-query-bubble-with-background {
+  background-color: var(--gemini-dark-bg) !important;
+  background: var(--gemini-dark-bg) !important;
+}
+
+body.custom-gemini-dark user-query-content,
+body.custom-gemini-dark user-message .message-bubble,
+body.custom-gemini-dark .user-query-bubble-with-background {
+  border-radius: 28px !important;
+}
+
+body.custom-gemini-dark user-query-content,
+body.custom-gemini-dark .user-query-container,
+body.custom-gemini-dark .query-content,
+body.custom-gemini-dark .user-text-container {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.custom-gemini-dark .user-query-bubble-with-background {
+  display: inline-block !important;
+  width: fit-content !important;
+  max-width: min(100%, 680px) !important;
+}
+
+body.custom-gemini-dark .query-text-line,
+body.custom-gemini-dark .query-content,
+body.custom-gemini-dark .query-text,
+body.custom-gemini-dark [class*="query-content"] {
+  background-color: transparent !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* --- 3.6 Code blocks --- */
+body.custom-gemini-dark pre,
+body.custom-gemini-dark .code-block,
+body.custom-gemini-dark code-block,
+body.custom-gemini-dark .code-block-wrapper,
+body.custom-gemini-dark .code-container,
+body.custom-gemini-dark [class*="code-block"],
+body.custom-gemini-dark .code-block-decoration {
+  background-color: var(--gemini-dark-bg) !important;
+  background: var(--gemini-dark-bg) !important;
+  border-radius: 12px !important;
+}
+body.custom-gemini-dark code {
+  background-color: var(--gemini-dark-bg) !important;
+}
+
+/* --- 3.7 Sidebar gradients --- */
+body.custom-gemini-dark bard-sidenav .top-gradient-container,
+body.custom-gemini-dark bard-sidenav .top-gradient {
+  display: none !important;
+  height: 0 !important;
+  background: none !important;
+}
+body.custom-gemini-dark bard-sidenav .bottom-gradient-container,
+body.custom-gemini-dark bard-sidenav .bottom-gradient {
+  background: linear-gradient(to top, var(--gemini-dark-bg) 0%, transparent 100%) !important;
+  height: 72px !important;
+}
+
+/* --- 3.7a Conversation bottom fade --- */
+body.custom-gemini-dark input-container.input-gradient,
+body.custom-gemini-dark input-container[class*="input-gradient"],
+body.custom-gemini-dark .input-gradient {
+  background-color: var(--gemini-dark-bottom-bg) !important;
+  background-image: none !important;
+}
+
+body.custom-gemini-dark input-container.input-gradient::before,
+body.custom-gemini-dark input-container[class*="input-gradient"]::before,
+body.custom-gemini-dark .input-gradient::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: -56px !important;
+  height: 56px !important;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.62) 38%,
+    rgba(0, 0, 0, 0.88) 76%,
+    var(--gemini-dark-bottom-bg) 100%
+  ) !important;
+  pointer-events: none !important;
+}
+
+body.custom-gemini-dark input-container.input-gradient::after,
+body.custom-gemini-dark input-container[class*="input-gradient"]::after,
+body.custom-gemini-dark .input-gradient::after {
+  background: none !important;
+}
+
+/* --- 3.7b Dark page-specific background fix --- */
+body.custom-gemini-dark PUBLICLY-SHARED-LINKS-PAGE,
+body.custom-gemini-dark FLEX-WINDOW-CONTAINER,
+body.custom-gemini-dark .window-container.desktop {
+  background-color: var(--gemini-dark-page-bg) !important;
+  background: var(--gemini-dark-page-bg) !important;
+  background-image: none !important;
+}
+
+/* --- 3.8 Input Box --- */
+body.custom-gemini-dark .input-area-container,
+body.custom-gemini-dark fieldset {
+  background-color: var(--gemini-dark-input-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 32px !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.custom-gemini-dark .textarea-wrapper,
+body.custom-gemini-dark .input-area {
+  background-color: var(--gemini-dark-input-bg) !important;
+  border-radius: 32px !important;
+}
+
+body.custom-gemini-dark chat-input,
+body.custom-gemini-dark textarea,
+body.custom-gemini-dark div[role="textbox"],
+body.custom-gemini-dark rich-textarea {
+  background-color: transparent !important;
+}
+
+
+/* ==========================================
+   4. Pill shape for input wrappers (theme-independent)
+   DO NOT use overflow:hidden — it kills the cursor!
+   ========================================== */
+chat-input,
+chat-input form,
+.text-input-field,
+.input-area-container,
+.textarea-wrapper,
+rich-textarea,
+fieldset {
+  border-radius: 32px !important;
+}
+
+
+/* ==========================================
+   5. Sidebar UI Scaling
+   ========================================== */
+
+/* Sidebar list items — compact pills */
+bard-sidenav .mat-mdc-list-item,
+bard-sidenav side-nav-action-button,
+bard-sidenav .side-nav-action-button,
+bard-sidenav a.mat-mdc-list-item,
+bard-sidenav button.mat-mdc-list-item {
+  height: 36px !important;
+  min-height: 36px !important;
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-radius: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* "发起新对话" button — force transparent */
+bard-sidenav side-nav-action-button,
+bard-sidenav .side-nav-action-button,
+bard-sidenav .new-chat-button,
+bard-sidenav .new-chat,
+bard-sidenav button.mdc-fab,
+bard-sidenav .mdc-fab,
+bard-sidenav [class*="new-chat"],
+bard-sidenav [class*="fab"],
+bard-sidenav side-nav-action-button button,
+bard-sidenav side-nav-action-button .mdc-button,
+bard-sidenav side-nav-action-button .mat-mdc-button-base {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Keep the top nav cluster compact and let the visible top copy of "库" live with it */
+bard-sidenav .side-navigation-container,
+bard-sidenav side-navigation-content,
+bard-sidenav nav,
+bard-sidenav .overflow-container {
+  justify-content: flex-start !important;
+  align-content: flex-start !important;
+  gap: 0 !important;
+}
+
+/* Gemini renders two copies of "库":
+ * one hidden in the fixed top action group, and one inside the scroller.
+ * Promote the fixed copy and hide the scrolling duplicate.
+ */
+bard-sidenav .top-action-list {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+bard-sidenav .top-action-list > .removed {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+bard-sidenav .top-action-list > .removed .mat-mdc-list-item,
+bard-sidenav .top-action-list > .removed .mdc-list-item {
+  width: 100% !important;
+}
+
+bard-sidenav infinite-scroller .top-action-list-scrollable,
+bard-sidenav .lr26-theme .top-action-list-scrollable {
+  display: none !important;
+}
+
+bard-sidenav .spacer,
+bard-sidenav [class*="spacer"],
+bard-sidenav [class*="flex-spacer"] {
+  flex: 0 0 auto !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/*
+ * Fix "库" spacing — aggressively reduce ALL vertical gaps
+ * in the sidebar's navigation structure.
+ */
+bard-sidenav mat-action-list,
+bard-sidenav .mat-mdc-action-list,
+bard-sidenav .mat-mdc-list-base,
+bard-sidenav .mat-mdc-nav-list {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+bard-sidenav .top-action-list-scrollable,
+bard-sidenav .top-action-list-scrollable + expandable-section,
+bard-sidenav expandable-section,
+bard-sidenav .section-divider {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+bard-sidenav .top-action-list-scrollable {
+  height: auto !important;
+  min-height: 36px !important;
+}
+
+bard-sidenav .section-divider {
+  height: 0 !important;
+  padding: 0 !important;
+}
+
+/* Kill dividers / spacers that create the gap before "库" */
+bard-sidenav mat-divider,
+bard-sidenav .mat-divider,
+bard-sidenav hr {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+}
+
+/* Squeeze gaps between sidebar sections */
+bard-sidenav .side-navigation-container > *,
+bard-sidenav side-navigation-content > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Sidebar section headers */
+bard-sidenav .mat-subheader,
+bard-sidenav .mdc-list-group__subheader,
+bard-sidenav [class*="section-header"],
+bard-sidenav .side-navigation-section-header {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+/* Sidebar icons */
+bard-sidenav .mat-mdc-list-item-icon,
+bard-sidenav .icon-container,
+bard-sidenav gem-icon,
+bard-sidenav .mat-icon,
+bard-sidenav mat-icon.google-symbols {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px !important;
+  line-height: 20px !important;
+}
+
+/* Sidebar text */
+bard-sidenav .label-and-badge,
+bard-sidenav .gds-label-l,
+bard-sidenav .mdc-list-item__primary-text,
+bard-sidenav .mat-mdc-list-item-unscoped-content,
+bard-sidenav .mdc-list-item__content {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  line-height: 36px !important;
+  height: 36px !important;
+}
+
+/* Truncation with ellipsis */
+bard-sidenav .label-and-badge,
+bard-sidenav .gds-label-l,
+bard-sidenav .mat-mdc-list-item-unscoped-content,
+bard-sidenav .mdc-list-item__primary-text,
+bard-sidenav .mdc-list-item__content,
+bard-sidenav .chat-history-list .mat-mdc-list-item .mdc-list-item__content,
+bard-sidenav .chat-history-list .label-and-badge {
+  display: block !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  line-height: 36px !important;
+  height: 36px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+bard-sidenav .chat-history-list .mat-mdc-list-item {
+  height: 36px !important;
+  min-height: 36px !important;
+}
+
+
+/* ==========================================
+   6. General Polish
+   ========================================== */
+
+/* Hover effects for sidebar items */
+bard-sidenav .mat-mdc-list-item:hover,
+bard-sidenav side-nav-action-button:hover,
+bard-sidenav a.mat-mdc-list-item:hover,
+bard-sidenav button.mat-mdc-list-item:hover {
+  background-color: rgba(100, 149, 237, 0.1) !important;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Input focus glow */
+.input-area-container:focus-within,
+fieldset:focus-within {
+  border-color: rgba(26, 115, 232, 0.4) !important;
+  box-shadow: 0 4px 24px rgba(26, 115, 232, 0.15) !important;
+  transition: all 0.25s ease !important;
+}
+
+
+/* ==========================================
+   7. Chat Content Font & Spacing
+   ========================================== */
+
+message-content,
+.message-content,
+model-response,
+user-message,
+.markdown-content,
+.markdown-content p,
+.markdown-content li,
+user-query,
+.query-content,
+.query-text,
+.query-text-line,
+.response-container,
+.response-content,
+model-response .markdown-main-panel {
+  font-size: 14.5px !important;
+  line-height: 1.8 !important;
+}
