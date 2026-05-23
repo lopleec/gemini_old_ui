@@ -1,6 +1,12 @@
 # Gemini Web UI Customizer
 
-An unofficial Manifest V3 browser extension that restyles [gemini.google.com](https://gemini.google.com/) with cleaner light and dark surfaces, tighter sidebar spacing, and targeted UI fixes.
+An unofficial Manifest V3 Chrome extension that replaces the redesigned Gemini UI introduced around Google I/O 2026 with a version that feels much closer to the older MD3-style interface.
+
+It restyles [gemini.google.com](https://gemini.google.com/) with cleaner light and dark surfaces, tighter sidebar spacing, and targeted UI fixes.
+
+## Why this exists
+
+I personally prefer the older Gemini / MD3 visual language. The newer 2026 redesign felt less readable and less appealing to me, so I built this extension as a lightweight "restore" layer rather than a full rewrite.
 
 ## Highlights
 
@@ -74,7 +80,13 @@ This project uses the MIT License. The GitHub repository includes the license fi
 
 # Gemini Web UI Customizer（中文）
 
-一个非官方的 Manifest V3 浏览器扩展，用来重设 [gemini.google.com](https://gemini.google.com/) 的界面样式，提供更统一的浅色/深色表面、更紧凑的侧边栏间距，以及一系列定向 UI 修复。
+这是一个非官方的 Manifest V3 Chrome 扩展，用来把 Google I/O 2026 前后推出的新版 Gemini UI，尽量恢复成更接近旧版 MD3 风格的界面。
+
+它会重设 [gemini.google.com](https://gemini.google.com/) 的样式，提供更统一的浅色/深色表面、更紧凑的侧边栏间距，以及一系列定向 UI 修复。
+
+## 为什么做这个
+
+我个人更喜欢旧版 Gemini / MD3 的视觉语言。我觉得 2026 这版新 UI 没那么耐看、也没那么顺眼，所以做了这个扩展，想用一种轻量覆盖的方式把那种旧版观感带回来，而不是去重写整个页面。
 
 ## 功能亮点
 
